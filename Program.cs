@@ -9,20 +9,96 @@
     {
         static void Main()
         {
-            Console.Write("Emter a num 1, 2, 3 or 4: ");
+            Console.Write("Emter a num 1 - 7: ");
             int n = int.Parse(Console.ReadLine());
-            while (n == 3)
+            while (n != 7)
             {
                 switch (n)
                 {
                     case 1: RegexTask(); break;
                     case 2: TextFilter(); break;
                     case 3: Articles(); break;
-                    case 4: return;
+                    case 4: Console.WriteLine(CountWord()); break;
+                    case 5: MatchNumberPhone(); break;
+                    case 6: Students(); break;
+                    case 7: return;
+
                 }
                 Console.Write("Emter a num 1, 2, 3 or 4: ");
                 n = int.Parse(Console.ReadLine());
             }
+        }
+
+        public static void Students()
+        {
+            List<Student> students = new List<Student>();
+
+            string[] nameLAstNameAgeCity = Console.ReadLine()
+                .Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+            while (nameLAstNameAgeCity[0] != "end")
+            {
+                string firstName = nameLAstNameAgeCity[0];
+                string lastName = nameLAstNameAgeCity[1];
+                int age = int.Parse(nameLAstNameAgeCity[2]);
+                string city = nameLAstNameAgeCity[3];
+
+                Student student = new Student()
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Age = age,
+                    City = city
+                };
+
+                students.Add(student);
+
+                nameLAstNameAgeCity = Console.ReadLine()
+                .Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            string filterCity = Console.ReadLine();
+
+            List<Student> filteredStudents = students
+                .Where(x => x.City == filterCity)
+                .ToList();
+
+            foreach (Student student in filteredStudents)
+            {
+                Console.WriteLine($"{student.FirstName} {student.LastName} is {student.Age} years old.");
+            }
+        }
+
+        public static void MatchNumberPhone()
+        {
+            string pattern = @"\+359([ |-])2\1[0-9]{3}\1[0-9]{4}";
+            string phones = Console.ReadLine();
+
+            var phonsMatches = Regex.Matches(phones, pattern);
+
+            var matchedPhones = phonsMatches
+                .Cast<Match>()
+                .Select(a => a.Value.Trim())
+                .ToArray();
+
+            Console.WriteLine(string.Join(", ", matchedPhones));
+        }
+
+        public static int CountWord()
+        {
+            string word = Console.ReadLine();
+
+            string text = Console.ReadLine().ToLower();
+
+            int count = 0;
+            int index = text.IndexOf(word);
+
+            while (index != -1)
+            {
+                count++;
+                index = text.IndexOf(word, index + 1);
+            }
+            return count;
         }
 
         public static void Articles()
