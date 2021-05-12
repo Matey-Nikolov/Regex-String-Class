@@ -3,15 +3,16 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Text.RegularExpressions;
 
     class Program
     {
         static void Main()
         {
-            Console.Write("Emter a num 1 - 7: ");
+            Console.Write("Enter a num 1 - 8: ");
             int n = int.Parse(Console.ReadLine());
-            while (n != 7)
+            while (n != 8)
             {
                 switch (n)
                 {
@@ -21,12 +22,30 @@
                     case 4: Console.WriteLine(CountWord()); break;
                     case 5: MatchNumberPhone(); break;
                     case 6: Students(); break;
-                    case 7: return;
+                    case 7: CountSubstring(); break; 
+                    case 8: return;
 
                 }
-                Console.Write("Emter a num 1, 2, 3 or 4: ");
+                Console.WriteLine("----------");
+                Console.Write("Enter a num 1 - 8: ");
                 n = int.Parse(Console.ReadLine());
             }
+        }
+
+        public static void CountSubstring()
+        {
+            string text = Console.ReadLine();
+            string pattern = Console.ReadLine();
+
+            int count = 0;
+            int index = text.IndexOf(pattern);
+
+            while (index != -1)
+            {
+                count++;
+                index = text.IndexOf(pattern, index + 1);
+            }
+            Console.WriteLine(count);
         }
 
         public static void Students()
