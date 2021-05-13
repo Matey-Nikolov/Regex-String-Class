@@ -10,24 +10,32 @@
     {
         static void Main()
         {
-            Console.Write("Enter a num 1 - 8: ");
+            Console.Write("Enter a num 1 - 10: ");
             int n = int.Parse(Console.ReadLine());
-            while (n != 8)
+            while (n != 10)
             {
                 switch (n)
                 {
-                    case 1: RegexTask(); break;
+                    case 1:
+                        Regex_Task furnitureTask = new Regex_Task();
+                        furnitureTask.Regexfurniture();
+                        break; 
                     case 2: TextFilter(); break;
                     case 3: Articles(); break;
                     case 4: Console.WriteLine(CountWord()); break;
                     case 5: MatchNumberPhone(); break;
                     case 6: Students(); break;
-                    case 7: CountSubstring(); break; 
-                    case 8: return;
+                    case 7: CountSubstring(); break;
+                    case 8:
+                        Regex_Task studentGrade = new Regex_Task();
+                        studentGrade.RegexStudentGrade();
+                        break;
+                   // case 9: RegexTask2(); break;
+                    case 10: return;
 
                 }
                 Console.WriteLine("----------");
-                Console.Write("Enter a num 1 - 8: ");
+                Console.Write("Enter a num 1 - 10: ");
                 n = int.Parse(Console.ReadLine());
             }
         }
@@ -169,41 +177,6 @@
                 text = text.Replace(banWord, new string('*', banWord.Length));
              
             Console.WriteLine(text);
-        }
-
-        public static void RegexTask()
-        {
-            Regex rg = new Regex(@">>([A-Za-z]+)<<([\d,]*)!([0-9])");
-            List<string> furniture = new List<string>();
-
-            string input = Console.ReadLine();
-            float TotalPrice = 0;
-
-            while (input != "Purchase")
-            {
-                string name = "";
-                float currentMoney = 0;
-                int quantity = 0;
-
-                Match match = rg.Match(input);
-
-                if (match.Success)
-                {
-                    name = match.Groups[1].Value;
-                    currentMoney = float.Parse(match.Groups[2].Value);
-                    quantity = int.Parse(match.Groups[3].Value);
-
-                    furniture.Add(name);
-                    TotalPrice += currentMoney * quantity;
-                }
-                input = Console.ReadLine();
-            }
-
-            Console.WriteLine("Bought furniture:");
-            foreach (string nameFurniture in furniture)
-                Console.WriteLine(nameFurniture);
-
-            Console.WriteLine($"Total money spend: {TotalPrice:f2}");
         }
     }
 }
