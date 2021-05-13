@@ -1,5 +1,5 @@
 # Regex-String-Class
-Number one - Task with regex.
+Number one and eight - regex tasks - one class.
 Number Two - Task string(Replace).
 Number three - Task wiht class and object.
 Number four - Count word. (String)
