@@ -20,12 +20,24 @@
                         Regex_Task furnitureTask = new Regex_Task();
                         furnitureTask.Regexfurniture();
                         break; 
-                    case 2: TextFilter(); break;
+                    case 2:
+                        String_Task textFilter = new String_Task();
+                        textFilter.TextFilter();
+                        break;
                     case 3: Articles(); break;
-                    case 4: Console.WriteLine(CountWord()); break;
-                    case 5: MatchNumberPhone(); break;
+                    case 4:
+                        String_Task countWord = new String_Task();
+                        Console.WriteLine(countWord.CountWord());
+                        break;
+                    case 5:
+                        Regex_Task matchNumberPhone = new Regex_Task();
+                        matchNumberPhone.MatchNumberPhone();
+                        break;
                     case 6: Students(); break;
-                    case 7: CountSubstring(); break;
+                    case 7:
+                        String_Task countSubstring = new String_Task();
+                        countSubstring.CountSubstring();
+                        break;
                     case 8:
                         Regex_Task studentGrade = new Regex_Task();
                         studentGrade.RegexStudentGrade();
@@ -35,25 +47,9 @@
 
                 }
                 Console.WriteLine("----------");
-                Console.Write("Enter a num 1 - 10: ");
+                Console.Write("Enter a num 1 - 10 : ");
                 n = int.Parse(Console.ReadLine());
             }
-        }
-
-        public static void CountSubstring()
-        {
-            string text = Console.ReadLine();
-            string pattern = Console.ReadLine();
-
-            int count = 0;
-            int index = text.IndexOf(pattern);
-
-            while (index != -1)
-            {
-                count++;
-                index = text.IndexOf(pattern, index + 1);
-            }
-            Console.WriteLine(count);
         }
 
         public static void Students()
@@ -96,38 +92,6 @@
             }
         }
 
-        public static void MatchNumberPhone()
-        {
-            string pattern = @"\+359([ |-])2\1[0-9]{3}\1[0-9]{4}";
-            string phones = Console.ReadLine();
-
-            var phonsMatches = Regex.Matches(phones, pattern);
-
-            var matchedPhones = phonsMatches
-                .Cast<Match>()
-                .Select(a => a.Value.Trim())
-                .ToArray();
-
-            Console.WriteLine(string.Join(", ", matchedPhones));
-        }
-
-        public static int CountWord()
-        {
-            string word = Console.ReadLine();
-
-            string text = Console.ReadLine().ToLower();
-
-            int count = 0;
-            int index = text.IndexOf(word);
-
-            while (index != -1)
-            {
-                count++;
-                index = text.IndexOf(word, index + 1);
-            }
-            return count;
-        }
-
         public static void Articles()
         {
             string[] someOrNo = Console.ReadLine()
@@ -164,19 +128,6 @@
             }
 
             Console.WriteLine(article.ToString());
-        }
-
-        public static void TextFilter()
-        {
-            string[] banWords = Console.ReadLine()
-                   .Split(", ", StringSplitOptions.RemoveEmptyEntries);
-
-            string text = Console.ReadLine();
-
-            foreach (string banWord in banWords)
-                text = text.Replace(banWord, new string('*', banWord.Length));
-             
-            Console.WriteLine(text);
         }
     }
 }
